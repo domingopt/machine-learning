@@ -26,11 +26,13 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
-
-
-
-
+for k = 1:K,
+  % Find the elements that have been assigned to the centroid
+  indices = find(idx == k);
+  points = size(indices, 1);
+  new_centroid = 1/points .* sum(X(indices, :), 1);
+  centroids(k,:) = new_centroid;
+end
 
 
 % =============================================================

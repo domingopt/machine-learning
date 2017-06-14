@@ -21,11 +21,20 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
-
+distance_matrix = zeros(size(X,1), K);
+for centroidIdx = 1:K,
+  % Calculate the distance to the centroid k in a vectorised way
+  % Compute the sum of squared differences between each row in X and the 
+  % centroid k. The second parameter in the sum function set to '2' indicates
+  % that the sum has to be done for each row.
+  v_distance = sum(bsxfun(@minus, X, centroids(centroidIdx,:)).^2,2);
+  distance_matrix(:, centroidIdx) = v_distance;  
+end
+% Get the index of the minimum values for each of the centroids distances.
+% I had to transpose the distance matrix as min calculates the minimum per 
+% column and not per row.
+[~, min_index] = min(distance_matrix');
+idx = min_index(:);
 
 % =============================================================
 

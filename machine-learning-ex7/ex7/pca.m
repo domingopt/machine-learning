@@ -20,10 +20,10 @@ S = zeros(n);
 %       number of examples).
 %
 
-
-
-
-
+% The data has already been normalised, and the covariance matrix of the data
+% is given by \Sigma = 1/m * X^T * X
+Sigma = 1 / m .* (X' * X);
+[U, S, V] = svd(Sigma);
 
 
 % =========================================================================
